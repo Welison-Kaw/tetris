@@ -4,57 +4,63 @@ from pygame.locals import *
 def grid_position(t):
 	return (t[0]*block_size+t[0]+1,t[1]*block_size+t[1]+2)
 
+def tetrimino_rotator(shape,column,line,direction):
+	for i in range(len(shape)):
+		shape[i][0] += column
+		shape[i][1] += line
+	return shape
+
 #temp name
 def tetrimino_giver(type):
 
 	if type == O_SHAPE:
-		color = (255,255,0) #yellow
-		shape =	((0,0)
-				,(0,1)
-				,(1,0)
-				,(1,1))
+		color = [255,255,0] #yellow
+		shape =	[[0,0]
+				,[0,1]
+				,[1,0]
+				,[1,1]]
 
 	if type == I_SHAPE:
-		color = (0,191,255) #deep sky blue
-		shape =	((0,0)
-				,(1,0)
-				,(2,0)
-				,(3,0))
+		color = [0,191,255] #deep sky blue
+		shape =	[[0,0]
+				,[1,0]
+				,[2,0]
+				,[3,0]]
 
 	if type == T_SHAPE:
-		color = (128,0,128) #purple
-		shape =	((1,0)
-				,(0,1)
-				,(1,1)
-				,(2,1))
+		color = [128,0,128] #purple
+		shape =	[[1,0]
+				,[0,1]
+				,[1,1]
+				,[2,1]]
 
 	if type == L_SHAPE:
-		color = (255,165,0) #orange
-		shape = ((2,0)
-				,(0,1)
-				,(1,1)
-				,(2,1))
+		color = [255,165,0] #orange
+		shape = [[2,0]
+				,[0,1]
+				,[1,1]
+				,[2,1]]
 
 	if type == J_SHAPE:
-		color = (30,50,255) #blue
-		shape =	((0,0)
-				,(0,1)
-				,(1,1)
-				,(2,1))
+		color = [30,50,255] #blue
+		shape =	[[0,0]
+				,[0,1]
+				,[1,1]
+				,[2,1]]
 
 	if type == S_SHAPE:
-		color = (0,128,0) #green
-		shape =	((1,0)
-				,(2,0)
-				,(0,1)
-				,(1,1))
+		color = [0,128,0] #green
+		shape =	[[1,0]
+				,[2,0]
+				,[0,1]
+				,[1,1]]
 
 	if type == Z_SHAPE:
-		color = (255,0,0) #red
-		shape =	((0,0)
-				,(1,0)
-				,(1,1)
-				,(2,1))
+		color = [255,0,0] #red
+		shape =	[[0,0]
+				,[1,0]
+				,[1,1]
+				,[2,1]]
 
 	return (color, shape)
 
@@ -91,8 +97,11 @@ mino = pygame.Surface((block_size, block_size))
 
 (color, shape) = tetrimino_giver(0)
 
+shape = tetrimino_rotator(shape, 0, 0, 0)
+
 mino.fill(color)
 tetrimino = shape
+print(shape)
 
 teste = 0
 
@@ -103,6 +112,7 @@ while True:
 
 	# inicio teste
 	(color, shape) = tetrimino_giver(teste)
+	shape = tetrimino_rotator(shape, 3, 5, 0)
 
 	mino.fill(color)
 	tetrimino = shape

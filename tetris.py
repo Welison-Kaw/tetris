@@ -76,8 +76,6 @@ matrix = pygame.Surface((block_size*10+11,block_size*20+22))
 matrix.fill((255,255,255))
 matrix_pos = ((max_x-(block_size*10+11))/2,15)
 
-print(grid_position((1,2)))
-
 # cria cada item cell
 cell = []
 for i in range(10):
@@ -101,7 +99,7 @@ teste = 0
 clock = pygame.time.Clock()
 
 while True:
-	clock.tick(1)
+	clock.tick(2)
 
 	# inicio teste
 	(color, shape) = tetrimino_giver(teste)
@@ -137,7 +135,6 @@ while True:
 			matrix.blit(cell[i][j], grid_position((i,j)))
 
 	for pos in tetrimino:
-		# print(pos*block_size)
 		matrix.blit(mino,grid_position(pos))
 
 	screen.blit(matrix, matrix_pos)

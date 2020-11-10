@@ -15,59 +15,48 @@ def tetrimino_giver(type):
 				,(1,1))
 
 	if type == I_SHAPE:
-		color = (173,216,230) #light blue
+		color = (0,191,255) #deep sky blue
 		shape =	((0,0)
-				,(0,1)
 				,(1,0)
-				,(1,1))
+				,(2,0)
+				,(3,0))
 
 	if type == T_SHAPE:
 		color = (128,0,128) #purple
-		shape =	((0,0)
+		shape =	((1,0)
 				,(0,1)
-				,(1,0)
-				,(1,1))
+				,(1,1)
+				,(2,1))
 
 	if type == L_SHAPE:
 		color = (255,165,0) #orange
-		shape = ((0,0)
+		shape = ((2,0)
 				,(0,1)
-				,(0,2)
-				,(1,2))
+				,(1,1)
+				,(2,1))
 
 	if type == J_SHAPE:
-		color = (0,0,139) #dark blue
+		color = (30,50,255) #blue
 		shape =	((0,0)
 				,(0,1)
-				,(1,0)
-				,(1,1))
+				,(1,1)
+				,(2,1))
 
 	if type == S_SHAPE:
-		color = (0,128,0)
-		shape =	((0,0)
+		color = (0,128,0) #green
+		shape =	((1,0)
+				,(2,0)
 				,(0,1)
-				,(1,0)
 				,(1,1))
 
 	if type == Z_SHAPE:
-		color = (255,0,0)
+		color = (255,0,0) #red
 		shape =	((0,0)
-				,(0,1)
 				,(1,0)
-				,(1,1))
+				,(1,1)
+				,(2,1))
 
 	return (color, shape)
-
-
-
-# def tetrimino_l(type):
-# 	if type == COLOR:
-# 		return (255,165,0)
-# 	if type == SHAPE:
-# 		return ((0,0)
-# 			   ,(0,1)
-# 			   ,(0,2)
-# 			   ,(1,2))
 
 O_SHAPE = 0
 I_SHAPE = 1

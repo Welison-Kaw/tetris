@@ -103,6 +103,7 @@ clock = pygame.time.Clock()
 while True:
 	clock.tick(1)
 
+	# inicio teste
 	(color, shape) = tetrimino_giver(teste)
 
 	mino.fill(color)
@@ -111,6 +112,7 @@ while True:
 		teste+=1
 	else:
 		teste=0
+	#fim teste
 
 
 	for event in pygame.event.get():

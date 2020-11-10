@@ -4,26 +4,78 @@ from pygame.locals import *
 def grid_position(t):
 	return (t[0]*block_size+t[0]+1,t[1]*block_size+t[1]+2)
 
-def tetrimino_o(type):
-	if type == COLOR:
-		return (255,255,0)
-	if type == SHAPE:
-		return ((0,0)
-			   ,(0,1)
-			   ,(1,0)
-			   ,(1,1))
+#temp name
+def tetrimino_giver(type):
 
-def tetrimino_l(type):
-	if type == COLOR:
-		return (255,165,0)
-	if type == SHAPE:
-		return ((0,0)
-			   ,(0,1)
-			   ,(0,2)
-			   ,(1,2))
+	if type == O_SHAPE:
+		color = (255,255,0) #yellow
+		shape =	((0,0)
+				,(0,1)
+				,(1,0)
+				,(1,1))
 
-COLOR = 0
-SHAPE = 1
+	if type == I_SHAPE:
+		color = (173,216,230) #light blue
+		shape =	((0,0)
+				,(0,1)
+				,(1,0)
+				,(1,1))
+
+	if type == T_SHAPE:
+		color = (128,0,128) #purple
+		shape =	((0,0)
+				,(0,1)
+				,(1,0)
+				,(1,1))
+
+	if type == L_SHAPE:
+		color = (255,165,0) #orange
+		shape = ((0,0)
+				,(0,1)
+				,(0,2)
+				,(1,2))
+
+	if type == J_SHAPE:
+		color = (0,0,139) #dark blue
+		shape =	((0,0)
+				,(0,1)
+				,(1,0)
+				,(1,1))
+
+	if type == S_SHAPE:
+		color = (0,128,0)
+		shape =	((0,0)
+				,(0,1)
+				,(1,0)
+				,(1,1))
+
+	if type == Z_SHAPE:
+		color = (255,0,0)
+		shape =	((0,0)
+				,(0,1)
+				,(1,0)
+				,(1,1))
+
+	return (color, shape)
+
+
+
+# def tetrimino_l(type):
+# 	if type == COLOR:
+# 		return (255,165,0)
+# 	if type == SHAPE:
+# 		return ((0,0)
+# 			   ,(0,1)
+# 			   ,(0,2)
+# 			   ,(1,2))
+
+O_SHAPE = 0
+I_SHAPE = 1
+T_SHAPE = 2
+L_SHAPE = 3
+J_SHAPE = 4
+S_SHAPE = 5
+Z_SHAPE = 6
 
 pygame.init()
 max_x = 640
@@ -46,18 +98,32 @@ for i in range(10):
 		cell[i][j] = pygame.Surface((block_size, block_size))
 		cell[i][j].fill((0,0,0))
 
-cell[2][2].fill((255,0,0))
-
 pygame.display.set_caption('Tetris')
 
-cell[2][2].fill((255,0,0))
-
 mino = pygame.Surface((block_size, block_size))
-mino.fill(tetrimino_l(COLOR))
-tetrimino = tetrimino_l(SHAPE)
-tetrimino_pos = (30,30)
+
+(color, shape) = tetrimino_giver(0)
+
+mino.fill(color)
+tetrimino = shape
+
+teste = 0
+
+clock = pygame.time.Clock()
 
 while True:
+	clock.tick(1)
+
+	(color, shape) = tetrimino_giver(teste)
+
+	mino.fill(color)
+	tetrimino = shape
+	if teste < 6:
+		teste+=1
+	else:
+		teste=0
+
+
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()

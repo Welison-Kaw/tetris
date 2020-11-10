@@ -101,7 +101,6 @@ shape = tetrimino_rotator(shape, 0, 0, 0)
 
 mino.fill(color)
 tetrimino = shape
-print(shape)
 
 teste = 0
 

@@ -10,57 +10,88 @@ def tetrimino_rotator(shape,column,line,direction):
 		shape[i][1] += line
 	return shape
 
+def reshape(old_shape):
+	r = []
+	for i in range(len(old_shape)):
+		for j in (range(len(old_shape[i]))):
+			if old_shape[i][j] == 1:
+				r.append([j,i])
+	return r
+
 #temp name
 def tetrimino_giver(type):
 
+	#shape = north facing
+
 	if type == O_SHAPE:
 		color = [255,255,0] #yellow
-		shape =	[[0,0]
-				,[0,1]
-				,[1,0]
+		shape =	[[1,1]
 				,[1,1]]
+		# shape =	[[0,0]
+		# 		,[0,1]
+		# 		,[1,0]
+		# 		,[1,1]]
 
 	if type == I_SHAPE:
 		color = [0,191,255] #deep sky blue
-		shape =	[[0,0]
-				,[1,0]
-				,[2,0]
-				,[3,0]]
+		shape =	[[0,0,0,0]
+				,[1,1,1,1]
+				,[0,0,0,0]
+				,[0,0,0,0]]
+		# shape =	[[0,0]
+		# 		,[1,0]
+		# 		,[2,0]
+		# 		,[3,0]]
 
 	if type == T_SHAPE:
 		color = [128,0,128] #purple
-		shape =	[[1,0]
-				,[0,1]
-				,[1,1]
-				,[2,1]]
+		shape =	[[0,1,0]
+				,[1,1,1]
+				,[0,0,0]]
+		# shape =	[[1,0]
+		# 		,[0,1]
+		# 		,[1,1]
+		# 		,[2,1]]
 
 	if type == L_SHAPE:
 		color = [255,165,0] #orange
-		shape = [[2,0]
-				,[0,1]
-				,[1,1]
-				,[2,1]]
+		shape = [[0,0,1]
+				,[1,1,1]
+				,[0,0,0]]
+		# shape = [[2,0]
+		# 		,[0,1]
+		# 		,[1,1]
+		# 		,[2,1]]
 
 	if type == J_SHAPE:
 		color = [30,50,255] #blue
-		shape =	[[0,0]
-				,[0,1]
-				,[1,1]
-				,[2,1]]
+		shape =	[[1,0,0]
+				,[1,1,1]
+				,[0,0,0]]
+		# shape =	[[0,0]
+		# 		,[0,1]
+		# 		,[1,1]
+		# 		,[2,1]]
 
 	if type == S_SHAPE:
 		color = [0,128,0] #green
-		shape =	[[1,0]
-				,[2,0]
-				,[0,1]
-				,[1,1]]
+		# shape =	[[1,0]
+		# 		,[2,0]
+		# 		,[0,1]
+		# 		,[1,1]]
+		shape =	[[0,1,1]
+				,[1,1,0]
+				,[0,0,0]]
 
 	if type == Z_SHAPE:
 		color = [255,0,0] #red
-		shape =	[[0,0]
-				,[1,0]
-				,[1,1]
-				,[2,1]]
+		shape =	[[1,1,0]
+				,[0,1,1]
+				,[0,0,0]]
+		# shape =	[[0,0]
+		# 		,[1,0]
+		# 		,[1,1]
+		# 		,[2,1]]
 
 	return (color, shape)
 
@@ -71,6 +102,11 @@ L_SHAPE = 3
 J_SHAPE = 4
 S_SHAPE = 5
 Z_SHAPE = 6
+
+NORHT = 1
+EAST  = 2
+SOUTH = 3
+WEST  = 4
 
 pygame.init()
 max_x = 640
@@ -97,10 +133,10 @@ mino = pygame.Surface((block_size, block_size))
 
 (color, shape) = tetrimino_giver(0)
 
-shape = tetrimino_rotator(shape, 0, 0, 0)
+shape = tetrimino_rotator(shape, 0, 0, NORHT)
 
 mino.fill(color)
-tetrimino = shape
+tetrimino = reshape(shape)
 
 teste = 0
 
@@ -110,8 +146,9 @@ while True:
 	clock.tick(2)
 
 	# inicio teste
+
 	(color, shape) = tetrimino_giver(teste)
-	shape = tetrimino_rotator(shape, 3, 5, 0)
+	shape = tetrimino_rotator(reshape(shape), 3, 5, 0)
 
 	mino.fill(color)
 	tetrimino = shape
@@ -119,6 +156,7 @@ while True:
 		teste+=1
 	else:
 		teste=0
+
 	#fim teste
 
 

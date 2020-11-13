@@ -1,22 +1,21 @@
 import pygame
 from pygame.locals import *
+from copy import copy, deepcopy
 
 def grid_position(t):
 	return (t[0]*block_size+t[0]+1,t[1]*block_size+t[1]+2)
 
-def tetrimino_mover(shape,column,line):
-	# if (((shape[0][0] + column) < 0) or ((shape[3][0] + column) >= 10)):
-	# 	return shape
-	for i in range(len(shape)):
-		shape[i][0] += column
-		shape[i][1] += line
-	return shape
+def tetrimino_mover(_shape,_column,_line):
+	for i in range(len(_shape)):
+		_shape[i][0] += _column
+		_shape[i][1] += _line
+	return _shape
 
-def tetrimino_rotator(shape,direction):
-	size = len(shape)
+def tetrimino_rotator(_shape,_direction):
+	size = len(_shape)
 	r = [[0 for j in range(size)] for i in range(size)]
-	for i in range(len(shape)):
-		for j in (range(len(shape[i]))):
+	for i in range(len(_shape)):
+		for j in (range(len(_shape[i]))):
 			if shape[i][j] == 1:
 				r[j][abs(i-size+1)] = 1
 	return r
@@ -29,6 +28,16 @@ def reshape(old_shape):
 			if old_shape[i][j] == 1:
 				r.append([j,i])
 	return r
+
+# cria a sombra da peça
+def ghost_position(_shape):
+	ghost_shape = _shape.copy()
+	
+	while (ghost_shape[3][1] < 19):
+		for i in range(len(ghost_shape)):
+			ghost_shape[i][1] += 1
+
+	return ghost_shape
 
 #temp name
 def tetrimino_giver(type):
@@ -109,13 +118,15 @@ for i in range(10):
 pygame.display.set_caption('Tetris')
 
 mino = pygame.Surface((block_size, block_size))
+ghost_mino = pygame.Surface((block_size, block_size))
+ghost_mino.fill((120,120,120))
 
-(color, shape) = tetrimino_giver(1)
+(color, shape) = tetrimino_giver(2)
 
 shape = tetrimino_mover(shape, 0, 0)
 
 mino.fill(color)
-tetrimino = reshape(shape)
+# tetrimino = reshape(shape)
 
 teste = 0
 
@@ -124,7 +135,7 @@ direction = 1
 position_x = 3
 position_y = 0
 
-tempo_level = 10
+tempo_level = 20
 contador = 0
 
 while True:
@@ -133,7 +144,7 @@ while True:
 	contador += 1
 	if contador > tempo_level:
 		contador = 0
-		position_y += 1
+		# position_y += 1 // temporário
 
 	# inicio teste
 
@@ -190,6 +201,7 @@ while True:
 			quit()
 
 	tetrimino = tetrimino_mover(reshape(shape), position_x, position_y)
+	ghost = ghost_position(deepcopy(tetrimino))
 
 	screen.fill((0,0,0))
 
@@ -199,6 +211,12 @@ while True:
 
 	for pos in tetrimino:
 		matrix.blit(mino,grid_position(pos))
+
+	for pos in tetrimino:
+		matrix.blit(mino,grid_position(pos))
+
+	for pos in ghost:
+		matrix.blit(ghost_mino,grid_position(pos))
 
 	screen.blit(matrix, matrix_pos)
 

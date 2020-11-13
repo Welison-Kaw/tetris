@@ -28,10 +28,6 @@ def tetrimino_giver(type):
 		color = [255,255,0] #yellow
 		shape =	[[1,1]
 				,[1,1]]
-		# shape =	[[0,0]
-		# 		,[0,1]
-		# 		,[1,0]
-		# 		,[1,1]]
 
 	if type == I_SHAPE:
 		color = [0,191,255] #deep sky blue
@@ -39,47 +35,27 @@ def tetrimino_giver(type):
 				,[1,1,1,1]
 				,[0,0,0,0]
 				,[0,0,0,0]]
-		# shape =	[[0,0]
-		# 		,[1,0]
-		# 		,[2,0]
-		# 		,[3,0]]
 
 	if type == T_SHAPE:
 		color = [128,0,128] #purple
 		shape =	[[0,1,0]
 				,[1,1,1]
 				,[0,0,0]]
-		# shape =	[[1,0]
-		# 		,[0,1]
-		# 		,[1,1]
-		# 		,[2,1]]
 
 	if type == L_SHAPE:
 		color = [255,165,0] #orange
 		shape = [[0,0,1]
 				,[1,1,1]
 				,[0,0,0]]
-		# shape = [[2,0]
-		# 		,[0,1]
-		# 		,[1,1]
-		# 		,[2,1]]
 
 	if type == J_SHAPE:
 		color = [30,50,255] #blue
 		shape =	[[1,0,0]
 				,[1,1,1]
 				,[0,0,0]]
-		# shape =	[[0,0]
-		# 		,[0,1]
-		# 		,[1,1]
-		# 		,[2,1]]
 
 	if type == S_SHAPE:
 		color = [0,128,0] #green
-		# shape =	[[1,0]
-		# 		,[2,0]
-		# 		,[0,1]
-		# 		,[1,1]]
 		shape =	[[0,1,1]
 				,[1,1,0]
 				,[0,0,0]]
@@ -89,10 +65,6 @@ def tetrimino_giver(type):
 		shape =	[[1,1,0]
 				,[0,1,1]
 				,[0,0,0]]
-		# shape =	[[0,0]
-		# 		,[1,0]
-		# 		,[1,1]
-		# 		,[2,1]]
 
 	return (color, shape)
 

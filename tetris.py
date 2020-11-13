@@ -166,6 +166,10 @@ while True:
 				quit()
 			if event.key == K_UP:
 				shape = tetrimino_rotator(shape,direction)
+				if reshape(shape)[3][0]+position_x > 9:
+					position_x = 6
+				if reshape(shape)[0][0]+position_x < 0:
+					position_x = 0
 			if event.key == K_RIGHT:
 				if reshape(shape)[3][0]+position_x < 9:
 					position_x += 1

@@ -4,11 +4,20 @@ from pygame.locals import *
 def grid_position(t):
 	return (t[0]*block_size+t[0]+1,t[1]*block_size+t[1]+2)
 
-def tetrimino_mover(shape,column,line,direction):
+def tetrimino_mover(shape,column,line):
 	for i in range(len(shape)):
 		shape[i][0] += column
 		shape[i][1] += line
 	return shape
+
+def tetrimino_rotator(shape,direction):
+	size = len(shape)
+	r = [[0 for j in range(size)] for i in range(size)]
+	for i in range(len(shape)):
+		for j in (range(len(shape[i]))):
+			if shape[i][j] == 1:
+				r[j][abs(i-size+1)] = 1
+	return r
 
 # transforma numa estrutura que o pygame consiga escrever
 def reshape(old_shape):
@@ -76,7 +85,7 @@ J_SHAPE = 4
 S_SHAPE = 5
 Z_SHAPE = 6
 
-NORHT = 1
+NORTH = 1
 EAST  = 2
 SOUTH = 3
 WEST  = 4
@@ -104,9 +113,9 @@ pygame.display.set_caption('Tetris')
 
 mino = pygame.Surface((block_size, block_size))
 
-(color, shape) = tetrimino_giver(0)
+(color, shape) = tetrimino_giver(1)
 
-shape = tetrimino_mover(shape, 0, 0, NORHT)
+shape = tetrimino_mover(shape, 0, 0)
 
 mino.fill(color)
 tetrimino = reshape(shape)
@@ -114,24 +123,40 @@ tetrimino = reshape(shape)
 teste = 0
 
 clock = pygame.time.Clock()
+direction = 1
+position_x = 3
+position_y = 0
 
 while True:
-	clock.tick(2)
+	clock.tick(15)
 
 	# inicio teste
 
-	(color, shape) = tetrimino_giver(teste)
-	shape = tetrimino_mover(reshape(shape), 3, 5, 0)
+	# (color, shape) = tetrimino_giver(teste)
+	
+	# if direction > 1:
+	# 	shape = tetrimino_rotator(shape,direction)
+	
+	# if direction > 2:
+	# 	shape = tetrimino_rotator(shape,direction)
+	
+	# if direction > 3:
+	# 	shape = tetrimino_rotator(shape,direction)
+	
+	# shape = tetrimino_mover(reshape(shape), 0, 0)
 
-	mino.fill(color)
-	tetrimino = shape
-	if teste < 6:
-		teste+=1
-	else:
-		teste=0
+	# mino.fill(color)
+	# tetrimino = shape
+	# if teste < 6:
+	# 	teste+=1
+	# else:
+	# 	teste=0
+	# 	direction+=1
+
+	# if direction > 4:
+	# 	direction = 1
 
 	#fim teste
-
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -142,16 +167,23 @@ while True:
 			if event.key == K_ESCAPE:
 				pygame.quit()
 				quit()
+			if event.key == K_UP:
+				shape = tetrimino_rotator(shape,direction)
+			if event.key == K_RIGHT:
+				position_x += 1
+			if event.key == K_LEFT:
+				position_x -= 1
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			pygame.quit()
 			quit()
 
+	tetrimino = tetrimino_mover(reshape(shape), position_x, position_y)
+
 	screen.fill((0,0,0))
 
 	for i in range(10):
 		for j in range(20):
-			# matrix.blit(cell[i][j], (i*block_size+i+1,j*block_size+j+2))
 			matrix.blit(cell[i][j], grid_position((i,j)))
 
 	for pos in tetrimino:

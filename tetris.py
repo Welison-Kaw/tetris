@@ -124,8 +124,16 @@ direction = 1
 position_x = 3
 position_y = 0
 
+tempo_level = 10
+contador = 0
+
 while True:
 	clock.tick(15)
+
+	contador += 1
+	if contador > tempo_level:
+		contador = 0
+		position_y += 1
 
 	# inicio teste
 

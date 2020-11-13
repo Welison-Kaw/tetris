@@ -85,11 +85,6 @@ J_SHAPE = 4
 S_SHAPE = 5
 Z_SHAPE = 6
 
-NORTH = 1
-EAST  = 2
-SOUTH = 3
-WEST  = 4
-
 pygame.init()
 max_x = 640
 max_y = 480

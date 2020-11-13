@@ -4,12 +4,13 @@ from pygame.locals import *
 def grid_position(t):
 	return (t[0]*block_size+t[0]+1,t[1]*block_size+t[1]+2)
 
-def tetrimino_rotator(shape,column,line,direction):
+def tetrimino_mover(shape,column,line,direction):
 	for i in range(len(shape)):
 		shape[i][0] += column
 		shape[i][1] += line
 	return shape
 
+# transforma numa estrutura que o pygame consiga escrever
 def reshape(old_shape):
 	r = []
 	for i in range(len(old_shape)):
@@ -133,7 +134,7 @@ mino = pygame.Surface((block_size, block_size))
 
 (color, shape) = tetrimino_giver(0)
 
-shape = tetrimino_rotator(shape, 0, 0, NORHT)
+shape = tetrimino_mover(shape, 0, 0, NORHT)
 
 mino.fill(color)
 tetrimino = reshape(shape)
@@ -148,7 +149,7 @@ while True:
 	# inicio teste
 
 	(color, shape) = tetrimino_giver(teste)
-	shape = tetrimino_rotator(reshape(shape), 3, 5, 0)
+	shape = tetrimino_mover(reshape(shape), 3, 5, 0)
 
 	mino.fill(color)
 	tetrimino = shape

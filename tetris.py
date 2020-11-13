@@ -2,6 +2,14 @@ import pygame
 from pygame.locals import *
 from copy import copy, deepcopy
 
+def collision(object, target):
+	if target == WALL:
+		for i in range(len(object)):
+			for j in range(len(object[i])):
+				if object[i][j] < 0 or object[i][j] > 9:
+					return object[i][j]
+	return False
+
 def grid_position(t):
 	return (t[0]*block_size+t[0]+1,t[1]*block_size+t[1]+2)
 
@@ -96,6 +104,8 @@ J_SHAPE = 4
 S_SHAPE = 5
 Z_SHAPE = 6
 
+WALL = 0
+
 pygame.init()
 max_x = 640
 max_y = 480
@@ -185,15 +195,20 @@ while True:
 				quit()
 			if event.key == K_UP:
 				shape = tetrimino_rotator(shape,direction)
-				if reshape(shape)[3][0]+position_x > 9:
-					position_x = 6
-				if reshape(shape)[0][0]+position_x < 0:
-					position_x = 0
+				collision_point = collision(tetrimino_mover(reshape(shape), position_x, position_y),WALL)
+				if collision_point < 0:
+					position_x = 0					
+				if collision_point > 9:
+					position_x = 10-len(shape)
+				# if reshape(shape)[3][0]+position_x > 9:
+				# 	position_x = 6
+				# if reshape(shape)[0][0]+position_x < 0:
+				# 	position_x = 0
 			if event.key == K_RIGHT:
-				if reshape(shape)[3][0]+position_x < 9:
+				if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y),WALL):
 					position_x += 1
 			if event.key == K_LEFT:
-				if reshape(shape)[0][0]+position_x > 0:
+				if not collision(tetrimino_mover(reshape(shape), position_x-1, position_y),WALL):
 					position_x -= 1
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
@@ -208,9 +223,6 @@ while True:
 	for i in range(10):
 		for j in range(20):
 			matrix.blit(cell[i][j], grid_position((i,j)))
-
-	for pos in tetrimino:
-		matrix.blit(mino,grid_position(pos))
 
 	for pos in tetrimino:
 		matrix.blit(mino,grid_position(pos))

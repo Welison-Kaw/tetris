@@ -5,6 +5,8 @@ def grid_position(t):
 	return (t[0]*block_size+t[0]+1,t[1]*block_size+t[1]+2)
 
 def tetrimino_mover(shape,column,line):
+	# if (((shape[0][0] + column) < 0) or ((shape[3][0] + column) >= 10)):
+	# 	return shape
 	for i in range(len(shape)):
 		shape[i][0] += column
 		shape[i][1] += line
@@ -165,9 +167,11 @@ while True:
 			if event.key == K_UP:
 				shape = tetrimino_rotator(shape,direction)
 			if event.key == K_RIGHT:
-				position_x += 1
+				if reshape(shape)[3][0]+position_x < 9:
+					position_x += 1
 			if event.key == K_LEFT:
-				position_x -= 1
+				if reshape(shape)[0][0]+position_x > 0:
+					position_x -= 1
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			pygame.quit()

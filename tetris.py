@@ -96,10 +96,6 @@ while True:
 					position_x = 0					
 				if collision_point > 9:
 					position_x = 10-len(shape)
-				# if reshape(shape)[3][0]+position_x > 9:
-				# 	position_x = 6
-				# if reshape(shape)[0][0]+position_x < 0:
-				# 	position_x = 0
 			if event.key == K_RIGHT:
 				if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y), WALL):
 					position_x += 1

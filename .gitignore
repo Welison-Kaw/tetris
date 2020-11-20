@@ -1,1 +1,3 @@
 teste.py
+.idea/*
+__pycache__/*

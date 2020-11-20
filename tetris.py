@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
-from copy import copy, deepcopy
+from copy import deepcopy
+
 
 def collision(object, target):
 	if target == WALL:
@@ -10,16 +11,19 @@ def collision(object, target):
 					return object[i][j]
 	return False
 
-def grid_position(t):
-	return (t[0]*block_size+t[0]+1,t[1]*block_size+t[1]+2)
 
-def tetrimino_mover(_shape,_column,_line):
+def grid_position(t):
+	return (t[0]*block_size+t[0]+1, t[1]*block_size+t[1]+2)
+
+
+def tetrimino_mover(_shape, _column, _line):
 	for i in range(len(_shape)):
 		_shape[i][0] += _column
 		_shape[i][1] += _line
 	return _shape
 
-def tetrimino_rotator(_shape,_direction):
+
+def tetrimino_rotator(_shape, _direction):
 	size = len(_shape)
 	r = [[0 for j in range(size)] for i in range(size)]
 	for i in range(len(_shape)):
@@ -28,14 +32,16 @@ def tetrimino_rotator(_shape,_direction):
 				r[j][abs(i-size+1)] = 1
 	return r
 
+
 # transforma numa estrutura que o pygame consiga escrever
 def reshape(old_shape):
 	r = []
 	for i in range(len(old_shape)):
 		for j in (range(len(old_shape[i]))):
 			if old_shape[i][j] == 1:
-				r.append([j,i])
+				r.append([j, i])
 	return r
+
 
 # cria a sombra da peça
 def ghost_position(_shape):
@@ -47,54 +53,72 @@ def ghost_position(_shape):
 
 	return ghost_shape
 
-#temp name
-def tetrimino_giver(type):
 
-	#shape = north facing
+# temp name
+def tetrimino_giver(_type):
 
-	if type == O_SHAPE:
-		color = [255,255,0] #yellow
-		shape =	[[1,1]
-				,[1,1]]
+	# shape = north facing
+	color = []
+	shape = []
 
-	if type == I_SHAPE:
-		color = [0,191,255] #deep sky blue
-		shape =	[[0,0,0,0]
-				,[1,1,1,1]
-				,[0,0,0,0]
-				,[0,0,0,0]]
+	if _type == O_SHAPE:
+		color = [255, 255, 0]  # yellow
+		shape = [
+					[1, 1],
+					[1, 1]
+				]
 
-	if type == T_SHAPE:
-		color = [128,0,128] #purple
-		shape =	[[0,1,0]
-				,[1,1,1]
-				,[0,0,0]]
+	if _type == I_SHAPE:
+		color = [0, 191, 255]  # deep sky blue
+		shape = [
+					[0, 0, 0, 0],
+					[1, 1, 1, 1],
+					[0, 0, 0, 0],
+					[0, 0, 0, 0]
+				]
 
-	if type == L_SHAPE:
-		color = [255,165,0] #orange
-		shape = [[0,0,1]
-				,[1,1,1]
-				,[0,0,0]]
+	if _type == T_SHAPE:
+		color = [128, 0, 128]  # purple
+		shape = [
+					[0, 1, 0],
+					[1, 1, 1],
+					[0, 0, 0]
+				]
 
-	if type == J_SHAPE:
-		color = [30,50,255] #blue
-		shape =	[[1,0,0]
-				,[1,1,1]
-				,[0,0,0]]
+	if _type == L_SHAPE:
+		color = [255, 165, 0]  # orange
+		shape = [
+					[0, 0, 1],
+					[1, 1, 1],
+					[0, 0, 0]
+				]
 
-	if type == S_SHAPE:
-		color = [0,128,0] #green
-		shape =	[[0,1,1]
-				,[1,1,0]
-				,[0,0,0]]
+	if _type == J_SHAPE:
+		color = [30, 50, 255]  # blue
+		shape = [
+					[1, 0, 0],
+					[1, 1, 1],
+					[0, 0, 0]
+				]
 
-	if type == Z_SHAPE:
-		color = [255,0,0] #red
-		shape =	[[1,1,0]
-				,[0,1,1]
-				,[0,0,0]]
+	if _type == S_SHAPE:
+		color = [0, 128, 0]  # green
+		shape = [
+					[0, 1, 1],
+					[1, 1, 0],
+					[0, 0, 0]
+				]
 
-	return (color, shape)
+	if _type == Z_SHAPE:
+		color = [255, 0, 0]  # red
+		shape = [
+					[1, 1, 0],
+					[0, 1, 1],
+					[0, 0, 0]
+				]
+
+	return color, shape
+
 
 O_SHAPE = 0
 I_SHAPE = 1
@@ -112,9 +136,9 @@ max_y = 480
 block_size = 20
 screen = pygame.display.set_mode((max_x, max_y))
 
-matrix = pygame.Surface((block_size*10+11,block_size*20+22))
-matrix.fill((255,255,255))
-matrix_pos = ((max_x-(block_size*10+11))/2,15)
+matrix = pygame.Surface((block_size*10+11, block_size*20+22))
+matrix.fill((255, 255, 255))
+matrix_pos = ((max_x-(block_size*10+11))/2, 15)
 
 # cria cada item cell
 cell = []
@@ -123,13 +147,13 @@ for i in range(10):
 	for j in range(20):
 		cell[i].append([])
 		cell[i][j] = pygame.Surface((block_size, block_size))
-		cell[i][j].fill((0,0,0))
+		cell[i][j].fill((0, 0, 0))
 
 pygame.display.set_caption('Tetris')
 
 mino = pygame.Surface((block_size, block_size))
 ghost_mino = pygame.Surface((block_size, block_size))
-ghost_mino.fill((120,120,120))
+ghost_mino.fill((120, 120, 120))
 
 (color, shape) = tetrimino_giver(2)
 
@@ -154,7 +178,7 @@ while True:
 	contador += 1
 	if contador > tempo_level:
 		contador = 0
-		# position_y += 1 // temporário
+		position_y += 1  # temporário
 
 	# inicio teste
 
@@ -182,7 +206,7 @@ while True:
 	# if direction > 4:
 	# 	direction = 1
 
-	#fim teste
+	# fim teste
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -194,8 +218,8 @@ while True:
 				pygame.quit()
 				quit()
 			if event.key == K_UP:
-				shape = tetrimino_rotator(shape,direction)
-				collision_point = collision(tetrimino_mover(reshape(shape), position_x, position_y),WALL)
+				shape = tetrimino_rotator(shape, direction)
+				collision_point = collision(tetrimino_mover(reshape(shape), position_x, position_y), WALL)
 				if collision_point < 0:
 					position_x = 0					
 				if collision_point > 9:
@@ -205,10 +229,10 @@ while True:
 				# if reshape(shape)[0][0]+position_x < 0:
 				# 	position_x = 0
 			if event.key == K_RIGHT:
-				if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y),WALL):
+				if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y), WALL):
 					position_x += 1
 			if event.key == K_LEFT:
-				if not collision(tetrimino_mover(reshape(shape), position_x-1, position_y),WALL):
+				if not collision(tetrimino_mover(reshape(shape), position_x-1, position_y), WALL):
 					position_x -= 1
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
@@ -218,17 +242,17 @@ while True:
 	tetrimino = tetrimino_mover(reshape(shape), position_x, position_y)
 	ghost = ghost_position(deepcopy(tetrimino))
 
-	screen.fill((0,0,0))
+	screen.fill((0, 0, 0))
 
 	for i in range(10):
 		for j in range(20):
-			matrix.blit(cell[i][j], grid_position((i,j)))
+			matrix.blit(cell[i][j], grid_position((i, j)))
 
 	for pos in tetrimino:
-		matrix.blit(mino,grid_position(pos))
+		matrix.blit(mino, grid_position(pos))
 
 	for pos in ghost:
-		matrix.blit(ghost_mino,grid_position(pos))
+		matrix.blit(ghost_mino, grid_position(pos))
 
 	screen.blit(matrix, matrix_pos)
 

@@ -4,9 +4,8 @@ from myConstants import *
 def collision(object, target):
     if target == WALL:
         for i in range(len(object)):
-            for j in range(len(object[i])):
-                if object[i][j] < 0 or object[i][j] > 9:
-                    return object[i][j]
+            if object[i][0] < 0 or object[i][0] > 9:
+                return object[i][0]
     return False
 
 

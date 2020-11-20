@@ -1,5 +1,5 @@
-from myFunctions import *
-from myConstants import *
+from my_functions import *
+from my_constants import *
 import pygame
 from pygame.locals import *
 from copy import deepcopy

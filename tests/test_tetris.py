@@ -1,4 +1,4 @@
-from myFunctions import *
+from my_functions import *
 
 
 def test_collision():

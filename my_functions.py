@@ -1,4 +1,4 @@
-from myConstants import *
+from my_constants import *
 
 
 def collision(object, target):

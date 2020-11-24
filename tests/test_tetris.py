@@ -21,4 +21,10 @@ def test_tetrimino_move():
     assert tetrimino.position() == [[6, 0], [5, 1], [6, 1], [7, 1]]
     tetrimino.move_left()
     assert tetrimino.position() == [[5, 0], [4, 1], [5, 1], [6, 1]]
-    assert True
+    tetrimino.move_right()
+    tetrimino.move_right()
+    tetrimino.move_right()
+    tetrimino.move_right()
+    tetrimino.move_right()
+    tetrimino.move_right()
+    assert tetrimino.position() == [[8, 0], [7, 1], [8, 1], [9, 1]]

@@ -32,7 +32,7 @@ ghost_mino.fill((120, 120, 120))
 
 tetrimino = Tetrimino(2)
 print("{}".format(tetrimino.get_shape()))
-tetrimino.move()
+tetrimino.move_right()
 print("{}".format(tetrimino.get_shape()))
 
 mino.fill(tetrimino.get_color())
@@ -99,12 +99,14 @@ while True:
 			# 		position_x = 0
 			# 	if collision_point > 9:
 			# 		position_x = 10-len(shape)
-			# if event.key == K_RIGHT:
-			# 	if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y), WALL):
-			# 		position_x += 1
-			# if event.key == K_LEFT:
-			# 	if not collision(tetrimino_mover(reshape(shape), position_x-1, position_y), WALL):
-			# 		position_x -= 1
+			if event.key == K_RIGHT:
+				# if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y), WALL):
+				# 	position_x += 1
+				tetrimino.move_right()
+			if event.key == K_LEFT:
+				# if not collision(tetrimino_mover(reshape(shape), position_x-1, position_y), WALL):
+				# 	position_x -= 1
+				tetrimino.move_left()
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			pygame.quit()

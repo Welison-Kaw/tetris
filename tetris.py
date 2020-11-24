@@ -30,9 +30,10 @@ mino = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
 ghost_mino = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
 ghost_mino.fill((120, 120, 120))
 
-# (color, shape) = tetrimino_giver(2)
-
 tetrimino = Tetrimino(2)
+print("{}".format(tetrimino.get_shape()))
+tetrimino.move()
+print("{}".format(tetrimino.get_shape()))
 
 mino.fill(tetrimino.get_color())
 
@@ -40,8 +41,8 @@ teste = 0
 
 clock = pygame.time.Clock()
 direction = 1
-position_x = 3
-position_y = 0
+# position_x = 3
+# position_y = 0
 
 tempo_level = 20
 contador = 0
@@ -52,7 +53,7 @@ while True:
 	contador += 1
 	if contador > tempo_level:
 		contador = 0
-		position_y += 1  # temporário
+		# position_y += 1  # temporário
 
 	# inicio teste
 
@@ -110,7 +111,7 @@ while True:
 			quit()
 
 	# tetrimino = tetrimino_mover(reshape(shape), position_x, position_y)
-	ghost = ghost_position(deepcopy(tetrimino.position()))
+	# ghost = ghost_position(deepcopy(tetrimino.position()))
 
 	screen.fill((0, 0, 0))
 
@@ -121,8 +122,8 @@ while True:
 	for pos in tetrimino.position():
 		matrix.blit(mino, grid_position(pos))
 
-	for pos in ghost:
-		matrix.blit(ghost_mino, grid_position(pos))
+	# for pos in ghost:
+	# 	matrix.blit(ghost_mino, grid_position(pos))
 
 	screen.blit(matrix, matrix_pos)
 

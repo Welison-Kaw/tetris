@@ -55,8 +55,19 @@ class Tetrimino:
             r[i][1] += self.y
         return r
 
+    def collision(self, target):
+        if target == WALL:
+            for i in range(len(self.position())):
+                if self.position()[i][0] < 0 or self.position()[i][0] > 9:
+                    return self.position()[i][0]
+        return False
+
     def move_right(self):
         self.x += 1
+        if self.collision(WALL):
+            self.x -= 1
 
     def move_left(self):
         self.x -= 1
+        if self.collision(WALL):
+            self.x += 1

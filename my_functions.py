@@ -1,14 +1,6 @@
 from my_constants import *
 
 
-def collision(object, target):
-    if target == WALL:
-        for i in range(len(object)):
-            if object[i][0] < 0 or object[i][0] > 9:
-                return object[i][0]
-    return False
-
-
 def grid_position(t):
     return t[0] * BLOCK_SIZE + t[0] + 1, t[1] * BLOCK_SIZE + t[1] + 2
 

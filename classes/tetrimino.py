@@ -49,4 +49,14 @@ class Tetrimino:
         return switcher.get(self.type, "Invalid Shape")
 
     def position(self):
-        return reshape(self.get_shape())
+        r = reshape(self.get_shape())
+        for i in range(len(r)):
+            r[i][0] += self.x
+            r[i][1] += self.y
+        return r
+
+    def move_right(self):
+        self.x += 1
+
+    def move_left(self):
+        self.x -= 1

@@ -1,9 +1,12 @@
 from my_constants import *
+from my_functions import *
 
 
 class Tetrimino:
     def __init__(self, _type):
         self.type = _type
+        self.x = 3
+        self.y = 0
         # self.__color = get_color
         # self.__shape = get_shape
 
@@ -44,3 +47,6 @@ class Tetrimino:
                       [0, 0, 0]]
         }
         return switcher.get(self.type, "Invalid Shape")
+
+    def position(self):
+        return reshape(self.get_shape())

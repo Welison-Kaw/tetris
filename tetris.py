@@ -1,5 +1,8 @@
+from _pytest.nodes import Item
+
 from my_functions import *
 from my_constants import *
+from classes.tetrimino import Tetrimino
 import pygame
 from pygame.locals import *
 from copy import deepcopy
@@ -27,12 +30,11 @@ mino = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
 ghost_mino = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
 ghost_mino.fill((120, 120, 120))
 
-(color, shape) = tetrimino_giver(2)
+# (color, shape) = tetrimino_giver(2)
 
-shape = tetrimino_mover(shape, 0, 0)
+tetrimino = Tetrimino(2)
 
-mino.fill(color)
-# tetrimino = reshape(shape)
+mino.fill(tetrimino.get_color())
 
 teste = 0
 
@@ -89,26 +91,26 @@ while True:
 			if event.key == K_ESCAPE:
 				pygame.quit()
 				quit()
-			if event.key == K_UP:
-				shape = tetrimino_rotator(shape, direction)
-				collision_point = collision(tetrimino_mover(reshape(shape), position_x, position_y), WALL)
-				if collision_point < 0:
-					position_x = 0					
-				if collision_point > 9:
-					position_x = 10-len(shape)
-			if event.key == K_RIGHT:
-				if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y), WALL):
-					position_x += 1
-			if event.key == K_LEFT:
-				if not collision(tetrimino_mover(reshape(shape), position_x-1, position_y), WALL):
-					position_x -= 1
+			# if event.key == K_UP:
+			# 	shape = tetrimino_rotator(shape, direction)
+			# 	collision_point = collision(tetrimino_mover(reshape(shape), position_x, position_y), WALL)
+			# 	if collision_point < 0:
+			# 		position_x = 0
+			# 	if collision_point > 9:
+			# 		position_x = 10-len(shape)
+			# if event.key == K_RIGHT:
+			# 	if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y), WALL):
+			# 		position_x += 1
+			# if event.key == K_LEFT:
+			# 	if not collision(tetrimino_mover(reshape(shape), position_x-1, position_y), WALL):
+			# 		position_x -= 1
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			pygame.quit()
 			quit()
 
-	tetrimino = tetrimino_mover(reshape(shape), position_x, position_y)
-	ghost = ghost_position(deepcopy(tetrimino))
+	# tetrimino = tetrimino_mover(reshape(shape), position_x, position_y)
+	ghost = ghost_position(deepcopy(tetrimino.position()))
 
 	screen.fill((0, 0, 0))
 
@@ -116,7 +118,7 @@ while True:
 		for j in range(20):
 			matrix.blit(cell[i][j], grid_position((i, j)))
 
-	for pos in tetrimino:
+	for pos in tetrimino.position():
 		matrix.blit(mino, grid_position(pos))
 
 	for pos in ghost:

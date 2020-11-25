@@ -111,8 +111,8 @@ while True:
 	for pos in tetrimino.position():
 		matrix.blit(mino, grid_position(pos))
 
-	# for pos in ghost:
-	# 	matrix.blit(ghost_mino, grid_position(pos))
+	for pos in tetrimino.ghost_position():
+		matrix.blit(ghost_mino, grid_position(pos))
 
 	screen.blit(matrix, matrix_pos)
 

@@ -20,14 +20,3 @@ def reshape(old_shape):
             if old_shape[i][j] == 1:
                 r.append([j, i])
     return r
-
-
-# cria a sombra da peça
-def ghost_position(_shape):
-    ghost_shape = _shape.copy()
-
-    while ghost_shape[3][1] < 19:
-        for i in range(len(ghost_shape)):
-            ghost_shape[i][1] += 1
-
-    return ghost_shape

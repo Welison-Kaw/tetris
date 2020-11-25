@@ -85,3 +85,12 @@ class Tetrimino:
             self.x = 0
         if collision_point > 9:
             self.x = 10-len(self.shape)
+
+    def ghost_position(self):
+        ghost_shape = self.position().copy()
+
+        while ghost_shape[3][1] < 19:
+            for i in range(len(ghost_shape)):
+                ghost_shape[i][1] += 1
+
+        return ghost_shape

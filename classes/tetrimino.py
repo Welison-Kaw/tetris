@@ -1,4 +1,3 @@
-from my_constants import *
 from my_functions import *
 
 
@@ -86,4 +85,3 @@ class Tetrimino:
             self.x = 0
         if collision_point > 9:
             self.x = 10-len(self.shape)
-

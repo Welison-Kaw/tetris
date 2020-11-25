@@ -31,9 +31,6 @@ ghost_mino = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
 ghost_mino.fill((120, 120, 120))
 
 tetrimino = Tetrimino(2)
-print("{}".format(tetrimino.get_shape()))
-tetrimino.move_right()
-print("{}".format(tetrimino.get_shape()))
 
 mino.fill(tetrimino.get_color())
 

@@ -94,19 +94,9 @@ while True:
 				quit()
 			if event.key == K_UP:
 				tetrimino.rotate()
-			# 	shape = tetrimino_rotator(shape, direction)
-			# 	collision_point = collision(tetrimino_mover(reshape(shape), position_x, position_y), WALL)
-			# 	if collision_point < 0:
-			# 		position_x = 0
-			# 	if collision_point > 9:
-			# 		position_x = 10-len(shape)
 			if event.key == K_RIGHT:
-				# if not collision(tetrimino_mover(reshape(shape), position_x+1, position_y), WALL):
-				# 	position_x += 1
 				tetrimino.move_right()
 			if event.key == K_LEFT:
-				# if not collision(tetrimino_mover(reshape(shape), position_x-1, position_y), WALL):
-				# 	position_x -= 1
 				tetrimino.move_left()
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
@@ -129,7 +119,5 @@ while True:
 	# 	matrix.blit(ghost_mino, grid_position(pos))
 
 	screen.blit(matrix, matrix_pos)
-
-	# pygame.draw.rect(screen,(50,50,50),[300,2,100,40])
 
 	pygame.display.update()

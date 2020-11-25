@@ -1,4 +1,4 @@
-from my_functions import *
+from my_constants import *
 
 
 class Tetrimino:
@@ -48,7 +48,12 @@ class Tetrimino:
         return self.shape
 
     def position(self):
-        r = reshape(self.get_shape())
+        r = []
+        for i in range(len(self.shape)):
+            for j in (range(len(self.shape[i]))):
+                if self.shape[i][j] == 1:
+                    r.append([j, i])
+        # r = reshape(self.get_shape())
         for i in range(len(r)):
             r[i][0] += self.x
             r[i][1] += self.y

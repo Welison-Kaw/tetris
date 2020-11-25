@@ -80,3 +80,10 @@ class Tetrimino:
                 if self.shape[i][j] == 1:
                     r[j][abs(i - size + 1)] = 1
         self.shape = r
+
+        collision_point = self.collision(WALL)
+        if collision_point < 0:
+            self.x = 0
+        if collision_point > 9:
+            self.x = 10-len(self.shape)
+

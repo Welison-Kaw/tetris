@@ -7,10 +7,6 @@ class Tetrimino:
         self.type = _type
         self.x = 3
         self.y = 0
-        # self.__color = get_color
-        # self.__shape = get_shape
-
-    def get_color(self):
         switcher = {
             O_SHAPE: [0xFF, 0xFF, 0x00],  # yellow
             I_SHAPE: [0x00, 0xBF, 0xFF],  # deep sky blue
@@ -20,9 +16,7 @@ class Tetrimino:
             S_SHAPE: [0x00, 0x80, 0x00],  # green
             Z_SHAPE: [0xFF, 0x00, 0x00]   # red
         }
-        return switcher.get(self.type, "Invalid Shape")
-
-    def get_shape(self):
+        self.color = switcher.get(_type, "Invalid Shape")
         switcher = {
             O_SHAPE: [[1, 1],
                       [1, 1]],
@@ -46,7 +40,13 @@ class Tetrimino:
                       [0, 1, 1],
                       [0, 0, 0]]
         }
-        return switcher.get(self.type, "Invalid Shape")
+        self.shape = switcher.get(self.type, "Invalid Shape")
+
+    def get_color(self):
+        return self.color
+
+    def get_shape(self):
+        return self.shape
 
     def position(self):
         r = reshape(self.get_shape())
@@ -71,3 +71,6 @@ class Tetrimino:
         self.x -= 1
         if self.collision(WALL):
             self.x += 1
+
+    def rotate(self):
+        pass

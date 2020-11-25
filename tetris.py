@@ -100,7 +100,6 @@ while True:
 			pygame.quit()
 			quit()
 
-	# tetrimino = tetrimino_mover(reshape(shape), position_x, position_y)
 	# ghost = ghost_position(deepcopy(tetrimino.position()))
 
 	screen.fill((0, 0, 0))

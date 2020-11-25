@@ -73,4 +73,10 @@ class Tetrimino:
             self.x += 1
 
     def rotate(self):
-        pass
+        size = len(self.shape)
+        r = [[0 for j in range(size)] for i in range(size)]
+        for i in range(len(self.shape)):
+            for j in (range(len(self.shape[i]))):
+                if self.shape[i][j] == 1:
+                    r[j][abs(i - size + 1)] = 1
+        self.shape = r

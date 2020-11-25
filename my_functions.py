@@ -12,16 +12,6 @@ def tetrimino_mover(_shape, _column, _line):
     return _shape
 
 
-def tetrimino_rotator(_shape, _direction):
-    size = len(_shape)
-    r = [[0 for j in range(size)] for i in range(size)]
-    for i in range(len(_shape)):
-        for j in (range(len(_shape[i]))):
-            if _shape[i][j] == 1:
-                r[j][abs(i - size + 1)] = 1
-    return r
-
-
 # transforma numa estrutura que o pygame consiga escrever
 def reshape(old_shape):
     r = []

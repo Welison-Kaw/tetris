@@ -92,7 +92,8 @@ while True:
 			if event.key == K_ESCAPE:
 				pygame.quit()
 				quit()
-			# if event.key == K_UP:
+			if event.key == K_UP:
+				tetrimino.rotate()
 			# 	shape = tetrimino_rotator(shape, direction)
 			# 	collision_point = collision(tetrimino_mover(reshape(shape), position_x, position_y), WALL)
 			# 	if collision_point < 0:

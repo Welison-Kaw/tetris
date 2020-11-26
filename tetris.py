@@ -35,11 +35,11 @@ teste = 0
 
 clock = pygame.time.Clock()
 direction = 1
-# position_x = 3
-# position_y = 0
 
 tempo_level = 20
 contador = 0
+
+tetrimino.y = 15
 
 is_moving_right = False
 is_moving_left = False
@@ -50,7 +50,7 @@ while True:
 	contador += 1
 	if contador > tempo_level:
 		contador = 0
-		# position_y += 1  # temporário
+		tetrimino.y += 1
 
 	# inicio teste
 
@@ -117,11 +117,11 @@ while True:
 		for j in range(20):
 			matrix.blit(cell[i][j], grid_position((i, j)))
 
-	for pos in tetrimino.position():
-		matrix.blit(mino, grid_position(pos))
-
 	for pos in tetrimino.ghost_position():
 		matrix.blit(ghost_mino, grid_position(pos))
+
+	for pos in tetrimino.position():
+		matrix.blit(mino, grid_position(pos))
 
 	screen.blit(matrix, matrix_pos)
 

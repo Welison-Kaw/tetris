@@ -1,6 +1,7 @@
 from my_functions import *
 from my_constants import *
 from classes.tetrimino import Tetrimino
+from classes.matrix import Matrix
 import pygame
 from pygame.locals import *
 
@@ -8,9 +9,11 @@ pygame.init()
 
 screen = pygame.display.set_mode((MAX_X, MAX_Y))
 
-matrix = pygame.Surface((BLOCK_SIZE*10+11, BLOCK_SIZE*20+22))
-matrix.fill((255, 255, 255))
-matrix_pos = ((MAX_X-(BLOCK_SIZE*10+11))/2, 15)
+matrix = Matrix(pygame, BLOCK_SIZE, MAX_X)
+
+# matrix = pygame.Surface((BLOCK_SIZE*10+11, BLOCK_SIZE*20+22))
+# matrix.fill((255, 255, 255))
+# matrix_pos = ((MAX_X-(BLOCK_SIZE*10+11))/2, 15)
 
 # cria cada item cell
 cell = []
@@ -29,7 +32,8 @@ ghost_mino.fill((120, 120, 120))
 
 tetrimino = Tetrimino(2)
 
-mino.fill(tetrimino.get_color())
+mino.fill(tetrimino.color)
+# print("{}\n{}".format(tetrimino.get_color(),tetrimino.color))
 
 teste = 0
 
@@ -94,7 +98,7 @@ while True:
 			if event.key == K_RIGHT:
 				is_moving_right = True
 			if event.key == K_LEFT:
-				is_moving_left =True
+				is_moving_left = True
 
 		if event.type == KEYUP:
 			if event.key == K_RIGHT:
@@ -115,14 +119,15 @@ while True:
 
 	for i in range(10):
 		for j in range(20):
-			matrix.blit(cell[i][j], grid_position((i, j)))
+			# matrix.blit(cell[i][j], grid_position((i, j)))
+			matrix.obj.blit(cell[i][j], grid_position((i, j)))
 
-	for pos in tetrimino.ghost_position():
-		matrix.blit(ghost_mino, grid_position(pos))
-
-	for pos in tetrimino.position():
-		matrix.blit(mino, grid_position(pos))
-
-	screen.blit(matrix, matrix_pos)
+	# for pos in tetrimino.ghost_position():
+	# 	matrix.blit(ghost_mino, grid_position(pos))
+	#
+	# for pos in tetrimino.position():
+	# 	matrix.blit(mino, grid_position(pos))
+	#
+	screen.blit(matrix.obj, matrix.pos)
 
 	pygame.display.update()

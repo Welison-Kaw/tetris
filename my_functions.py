@@ -1,4 +1,4 @@
-from my_constants import *
+from my_constants import BLOCK_SIZE
 
 
 def grid_position(t):

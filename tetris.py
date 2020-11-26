@@ -41,6 +41,9 @@ direction = 1
 tempo_level = 20
 contador = 0
 
+is_moving_right = False
+is_moving_left = False
+
 while True:
 	clock.tick(15)
 
@@ -89,15 +92,24 @@ while True:
 			if event.key == K_UP:
 				tetrimino.rotate()
 			if event.key == K_RIGHT:
-				tetrimino.move_right()
+				is_moving_right = True
 			if event.key == K_LEFT:
-				tetrimino.move_left()
+				is_moving_left =True
+
+		if event.type == KEYUP:
+			if event.key == K_RIGHT:
+				is_moving_right = False
+			if event.key == K_LEFT:
+				is_moving_left = False
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			pygame.quit()
 			quit()
 
-	# ghost = ghost_position(deepcopy(tetrimino.position()))
+	if is_moving_right:
+		tetrimino.move_right()
+	if is_moving_left:
+		tetrimino.move_left()
 
 	screen.fill((0, 0, 0))
 

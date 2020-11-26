@@ -2,8 +2,8 @@ from my_constants import *
 
 
 class Tetrimino:
-    def __init__(self, _type):
-        self.type = _type
+    def __init__(self, shape_type):
+        self.type = shape_type
         self.x = 3
         self.y = 0
         switcher = {
@@ -15,7 +15,7 @@ class Tetrimino:
             S_SHAPE: [0x00, 0x80, 0x00],  # green
             Z_SHAPE: [0xFF, 0x00, 0x00]   # red
         }
-        self.color = switcher.get(_type, "Invalid Shape")
+        self.color = switcher.get(shape_type, "Invalid Shape")
         switcher = {
             O_SHAPE: [[1, 1],
                       [1, 1]],
@@ -54,7 +54,7 @@ class Tetrimino:
         return self.__shape
 
     @shape.setter
-    def shape (self, shape):
+    def shape(self, shape):
         self.__shape = shape
 
     def position(self):

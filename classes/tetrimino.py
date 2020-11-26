@@ -41,11 +41,21 @@ class Tetrimino:
         }
         self.shape = switcher.get(self.type, "Invalid Shape")
 
-    def get_color(self):
-        return self.color
+    @property
+    def color(self):
+        return self.__color
 
-    def get_shape(self):
-        return self.shape
+    @color.setter
+    def color(self, color):
+        self.__color = color
+
+    @property
+    def shape(self):
+        return self.__shape
+
+    @shape.setter
+    def shape (self, shape):
+        self.__shape = shape
 
     def position(self):
         r = []

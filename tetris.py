@@ -1,11 +1,8 @@
-from _pytest.nodes import Item
-
 from my_functions import *
 from my_constants import *
 from classes.tetrimino import Tetrimino
 import pygame
 from pygame.locals import *
-from copy import deepcopy
 
 pygame.init()
 

@@ -1,4 +1,3 @@
-from my_functions import *
 from classes.tetrimino import Tetrimino
 
 

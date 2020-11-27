@@ -43,7 +43,7 @@ direction = 1
 tempo_level = 20
 contador = 0
 
-tetrimino.y = 15
+tetrimino.y = 10
 
 is_moving_right = False
 is_moving_left = False
@@ -119,15 +119,14 @@ while True:
 
 	for i in range(10):
 		for j in range(20):
-			# matrix.blit(cell[i][j], grid_position((i, j)))
-			matrix.obj.blit(cell[i][j], grid_position((i, j)))
+			matrix.obj.blit(cell[i][j], matrix.grid_position((i, j)))
 
-	# for pos in tetrimino.ghost_position():
-	# 	matrix.blit(ghost_mino, grid_position(pos))
-	#
-	# for pos in tetrimino.position():
-	# 	matrix.blit(mino, grid_position(pos))
-	#
+	for pos in tetrimino.ghost_position():
+		matrix.obj.blit(ghost_mino, matrix.grid_position(pos))
+
+	for pos in tetrimino.position():
+		matrix.obj.blit(mino, matrix.grid_position(pos))
+
 	screen.blit(matrix.obj, matrix.pos)
 
 	pygame.display.update()

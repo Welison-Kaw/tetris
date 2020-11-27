@@ -1,9 +1,30 @@
+from classes.cell import Cell
+
+
 class Matrix:
     def __init__(self, _pygame, block_size, max_x):
         self.__block_size = block_size
         self.obj = _pygame.Surface((self.__block_size*10+11, self.__block_size*20+22))
         self.obj.fill((255, 255, 255))
         self.pos = ((max_x-(self.__block_size*10+11))/2, 15)
+        self.cell = []
+
+        for i in range(10):
+            self.cell.append([])
+            for j in range(20):
+                self.cell[i].append([])
+                self.cell[i][j] = Cell()
+                self.cell[i][j].block = _pygame.Surface((self.__block_size, self.__block_size))
+                self.cell[i][j].color = (0, 0, 0)
+                self.cell[i][j].block.fill(self.cell[i][j].color)
+
+    @property
+    def cell(self):
+        return self.__cell
+
+    @cell.setter
+    def cell(self, cell):
+        self.__cell = cell
 
     @property
     def obj(self):

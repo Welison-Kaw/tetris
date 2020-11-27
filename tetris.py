@@ -1,4 +1,3 @@
-from my_functions import *
 from my_constants import *
 from classes.tetrimino import Tetrimino
 from classes.matrix import Matrix
@@ -10,15 +9,6 @@ pygame.init()
 screen = pygame.display.set_mode((MAX_X, MAX_Y))
 
 matrix = Matrix(pygame, BLOCK_SIZE, MAX_X)
-
-# cria cada item cell
-cell = []
-for i in range(10):
-	cell.append([])
-	for j in range(20):
-		cell[i].append([])
-		cell[i][j] = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
-		cell[i][j].fill((0, 0, 0))
 
 pygame.display.set_caption('Tetris')
 
@@ -114,7 +104,7 @@ while True:
 
 	for i in range(10):
 		for j in range(20):
-			matrix.obj.blit(cell[i][j], matrix.grid_position((i, j)))
+			matrix.obj.blit(matrix.cell[i][j].block, matrix.grid_position((i, j)))
 
 	for pos in tetrimino.ghost_position():
 		matrix.obj.blit(ghost_mino, matrix.grid_position(pos))

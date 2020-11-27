@@ -7,8 +7,8 @@ def test_collision():
 
 def test_tetrimino_giver():
     tetrimino = Tetrimino(0)
-    assert (tetrimino.get_color() == [255, 255, 0])
-    assert tetrimino.get_shape() == [[1, 1], [1, 1]]
+    assert (tetrimino.color == [255, 255, 0])
+    assert tetrimino.shape == [[1, 1], [1, 1]]
 
 
 def test_tetrimino_move():

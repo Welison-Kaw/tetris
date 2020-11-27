@@ -11,10 +11,6 @@ screen = pygame.display.set_mode((MAX_X, MAX_Y))
 
 matrix = Matrix(pygame, BLOCK_SIZE, MAX_X)
 
-# matrix = pygame.Surface((BLOCK_SIZE*10+11, BLOCK_SIZE*20+22))
-# matrix.fill((255, 255, 255))
-# matrix_pos = ((MAX_X-(BLOCK_SIZE*10+11))/2, 15)
-
 # cria cada item cell
 cell = []
 for i in range(10):
@@ -33,7 +29,6 @@ ghost_mino.fill((120, 120, 120))
 tetrimino = Tetrimino(2)
 
 mino.fill(tetrimino.color)
-# print("{}\n{}".format(tetrimino.get_color(),tetrimino.color))
 
 teste = 0
 

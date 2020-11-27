@@ -2,10 +2,11 @@ from my_constants import *
 
 
 class Tetrimino:
-    def __init__(self, shape_type):
+    def __init__(self, shape_type, _matrix):
         self.type = shape_type
         self.x = 3
         self.y = 0
+        self.matrix = _matrix
         switcher = {
             O_SHAPE: [0xFF, 0xFF, 0x00],  # yellow
             I_SHAPE: [0x00, 0xBF, 0xFF],  # deep sky blue
@@ -69,11 +70,21 @@ class Tetrimino:
             r[i][1] += self.y
         return r
 
-    def collision(self, target):
+    def collision(self, target, line=0):
         if target == WALL:
             for i in range(len(self.position())):
                 if self.position()[i][0] < 0 or self.position()[i][0] > 9:
                     return self.position()[i][0]
+
+        if target == FLOOR:
+            difference = self.y - line
+
+            # self.matrix.cell[0][0].color == (0, 0, 0)
+            for i in range(len(self.position())):
+                print(self.matrix.cell[i][19].color)
+                # self.position()[i][1] += 1
+
+            pass
         return False
 
     def move_right(self):
@@ -103,6 +114,8 @@ class Tetrimino:
 
     def ghost_position(self):
         ghost_shape = self.position().copy()
+        # print(ghost_shape)
+        self.collision(FLOOR, 2)
 
         while ghost_shape[3][1] < 19:
             for i in range(len(ghost_shape)):

@@ -22,7 +22,7 @@ mino = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
 ghost_mino = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
 ghost_mino.fill((120, 120, 120))
 
-tetrimino = Tetrimino(2)
+tetrimino = Tetrimino(2, matrix)
 
 mino.fill(tetrimino.color)
 

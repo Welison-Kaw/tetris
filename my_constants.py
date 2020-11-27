@@ -7,6 +7,7 @@ S_SHAPE = 5
 Z_SHAPE = 6
 
 WALL = 0
+FLOOR = 1
 
 MAX_X = 640
 MAX_Y = 480

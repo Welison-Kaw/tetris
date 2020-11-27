@@ -13,18 +13,15 @@ class Matrix:
             self.cell.append([])
             for j in range(20):
                 self.cell[i].append([])
-                self.cell[i][j] = Cell()
-                self.cell[i][j].block = _pygame.Surface((self.__block_size, self.__block_size))
-                self.cell[i][j].color = (0, 0, 0)
-                self.cell[i][j].block.fill(self.cell[i][j].color)
+                self.cell[i][j] = Cell(_pygame, self.__block_size)
 
-    @property
-    def cell(self):
-        return self.__cell
-
-    @cell.setter
-    def cell(self, cell):
-        self.__cell = cell
+    # @property
+    # def cell(self):
+    #     return self.__cell
+    #
+    # @cell.setter
+    # def cell(self, cell):
+    #     self.__cell = cell
 
     @property
     def obj(self):

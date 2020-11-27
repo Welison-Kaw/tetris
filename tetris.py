@@ -10,6 +10,12 @@ screen = pygame.display.set_mode((MAX_X, MAX_Y))
 
 matrix = Matrix(pygame, BLOCK_SIZE, MAX_X)
 
+# teste
+matrix.cell[9][19].color = (0xFF, 0xFF, 0x00)
+matrix.cell[8][19].color = (0xFF, 0xFF, 0x00)
+matrix.cell[9][18].color = (0xFF, 0xFF, 0x00)
+matrix.cell[8][18].color = (0xFF, 0xFF, 0x00)
+
 pygame.display.set_caption('Tetris')
 
 mino = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
